@@ -1,3 +1,6 @@
+# [Bedrock](https://roots.io/bedrock/) for [Pantheon](https://pantheon.io/)
+This repository serves as an example of the modifications needed to the Bedrock framework for use with Pantheon. The git history shows the modifications made to Bedrock `1.9.0` step by step. Reviewing the [commit history](https://github.com/ataylorme/example-roots-bedrock-for-Pantheon/commits/master) is the best way to understand what was changed and why. The original Bedrock README is below.
+
 # [Bedrock](https://roots.io/bedrock/)
 [![Packagist](https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square)](https://packagist.org/packages/roots/bedrock)
 [![Build Status](https://img.shields.io/travis/roots/bedrock.svg?style=flat-square)](https://travis-ci.org/roots/bedrock)
