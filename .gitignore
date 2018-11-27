@@ -1,19 +1,63 @@
-# Application
-web/app/plugins/*
-!web/app/plugins/.gitkeep
-web/app/mu-plugins/*/
-web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
+# WordPress #
+############
+web/wp-config-local.php
+web/wp-cli.local.yml
+web/app/uploads
+web/app/blogs.dir/
+web/app/upgrade/
+web/app/backup-db/
+web/app/updraft/
+web/app/backupwordpress-*/
+web/app/managewp/backups/
+web/app/advanced-cache.php
+web/app/wp-cache-config.php
+web/sitemap.xml
+web/sitemap.xml.gz
+*.log
 
-# WordPress
-web/wp
-web/.htaccess
+# @TODO writable paths
+web/app/cache/
+web/app/backups/
+
+# Avoid accidental modification of pantheon.upstream.yml in sites
+# created from this upstream
+pantheon.upstream.yml
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+
+# Logs and databases #
+######################
+*.log
+*.sql
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+
+# Vim generated files #
+######################
+*.un~
+
+# SASS #
+##########
+.sass-cache
 
 # Dotenv
 .env
 .env.*
 !.env.example
-
-# Composer
-/vendor
