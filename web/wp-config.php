@@ -4,20 +4,6 @@
  * This file is required in the root directory so WordPress can find it.
  * WP is hardcoded to look in its own directory or one directory up for wp-config.php.
  */
-
-/**
- * Set root path
- */
-$root_path = realpath( __DIR__ . '/..' );
-
-/**
- * Include the Composer autoload
- */
-require_once( $root_path . '/vendor/autoload.php' );
-
-/**
- * Include the configuration loader
- */
-require_once( $root_path . '/config/application.php' );
-
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/config/application.php';
 require_once ABSPATH . 'wp-settings.php';
