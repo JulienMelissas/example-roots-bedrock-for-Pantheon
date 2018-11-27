@@ -22,12 +22,14 @@ $webroot_dir = $root_dir . '/web';
 Env::init();
 
 /**
- * Use Dotenv to set required environment variables and load .env file in root
+ * Use Dotenv to set required environment variables and load .env file in root if not on Pantheon
  */
-$dotenv = new Dotenv\Dotenv($root_dir);
-if (file_exists($root_dir . '/.env')) {
-    $dotenv->load();
-    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'WP_HOME', 'WP_SITEURL']);
+if( ! isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
+    $dotenv = new Dotenv\Dotenv($root_dir);
+    if (file_exists($root_dir . '/.env')) {
+        $dotenv->load();
+        $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'WP_HOME', 'WP_SITEURL']);
+    }
 }
 
 /**
@@ -39,8 +41,11 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 /**
  * URLs
  */
-Config::define('WP_HOME', env('WP_HOME'));
-Config::define('WP_SITEURL', env('WP_SITEURL'));
+// Use HTTP_HOST if there aren't environment variables to get the URL dynamically
+$site_url = env( 'WP_HOME' ) ? env( 'WP_HOME' ) : 'https://' . $_SERVER['HTTP_HOST'] . '/';
+
+Config::define('WP_HOME', $site_url );
+Config::define('WP_SITEURL', env('WP_SITEURL') ? env('WP_SITEURL') : $site_url . 'wp/' );
 
 /**
  * Custom Content Directory
@@ -55,7 +60,7 @@ Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_D
 Config::define('DB_NAME', env('DB_NAME'));
 Config::define('DB_USER', env('DB_USER'));
 Config::define('DB_PASSWORD', env('DB_PASSWORD'));
-Config::define('DB_HOST', env('DB_HOST') ?: 'localhost');
+Config::define('DB_HOST', env('DB_HOST') ? env( 'DB_HOST' )  . ':' . env( 'DB_PORT' ) : 'localhost');
 Config::define('DB_CHARSET', 'utf8mb4');
 Config::define('DB_COLLATE', '');
 $table_prefix = env('DB_PREFIX') ?: 'wp_';
